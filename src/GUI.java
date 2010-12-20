@@ -1,0 +1,86 @@
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class GUI
+{
+    public GUI()
+    {
+        final TrayIcon trayIcon;
+
+        if (SystemTray.isSupported())
+        {
+
+            SystemTray tray = SystemTray.getSystemTray();
+            Image image = Toolkit.getDefaultToolkit().getImage("tray.gif");
+
+            MouseListener mouseListener = new MouseListener() {
+                
+                public void mouseClicked(MouseEvent e) {
+                    System.out.println("Tray Icon - Mouse clicked!");
+                }
+                public void mouseEntered(MouseEvent e) {
+                    System.out.println("Tray Icon - Mouse entered!");
+                }
+                public void mouseExited(MouseEvent e) {
+                    System.out.println("Tray Icon - Mouse exited!");
+                }
+                public void mousePressed(MouseEvent e) {
+                    System.out.println("Tray Icon - Mouse pressed!");
+                }
+                public void mouseReleased(MouseEvent e) {
+                    System.out.println("Tray Icon - Mouse released!");     
+                }
+
+            };
+
+            ActionListener exitListener = new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                	//Exit the app
+                    System.exit(0);
+                }
+            };
+            
+            ActionListener showStatusListener = new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    //Show status
+                }
+            };
+            
+            PopupMenu popup = new PopupMenu();
+            MenuItem exitItem = new MenuItem("Exit");
+            MenuItem showStatusItem = new MenuItem("Show Status");
+            showStatusItem.addActionListener(showStatusListener);
+            exitItem.addActionListener(exitListener);
+            popup.add(showStatusItem);
+            popup.add(exitItem);
+
+            trayIcon = new TrayIcon(image, "BinSwarm", popup);
+
+            ActionListener actionListener = new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    trayIcon.displayMessage("Action Event", 
+                        "An Action Event Has Been Peformed!",
+                        TrayIcon.MessageType.INFO);
+                }
+            };
+            
+            trayIcon.setImageAutoSize(true);
+            trayIcon.addActionListener(actionListener);
+            trayIcon.addMouseListener(mouseListener);
+
+            try {
+                  tray.add(trayIcon);
+            } catch (AWTException e) {
+                System.err.println("TrayIcon could not be added.");
+            }
+
+        } else {
+            System.err.println("System tray is currently not supported.");
+        }
+    }    
+}
