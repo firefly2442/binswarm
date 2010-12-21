@@ -33,17 +33,15 @@ public class UDPListener implements Runnable
 					int port = receivePacket.getPort();
 					System.out.println("Received: " + sentence);
 					System.out.println("From: " + IPAddress.toString() + ":" + port);
+					
+					//if this is a new computer that is not in our list, send a reply
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
 			}
 			
 		} catch (SocketException e1) {
 			e1.printStackTrace();
 		}
-		
-		//send reply
 	}
-
 }
