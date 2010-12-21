@@ -34,7 +34,9 @@ public class UDPListener implements Runnable
 					System.out.println("Received: " + sentence);
 					System.out.println("From: " + IPAddress.toString() + ":" + port);
 					
+					//TODO
 					//if this is a new computer that is not in our list, send a reply
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
