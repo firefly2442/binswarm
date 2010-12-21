@@ -1,14 +1,19 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
-public class UDPBroadcast
+public class UDPBroadcast implements Runnable
 {
+	private final Timer timer = new Timer();
+
 	public UDPBroadcast()
 	{
 		//Constructor
-		sendBroadcast();
+		Thread broadcastThread = new Thread(this);
+		broadcastThread.start();
 	}
 	
 	public void sendBroadcast()
@@ -27,5 +32,20 @@ public class UDPBroadcast
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void start(int seconds) {
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                sendBroadcast();
+            }
+        }, 0, seconds * 1000);
+    }
+
+
+	public void run()
+	{
+		//if a certain amount of time has gone by, send out a broadcast
+		start(10); //run every 10 seconds
 	}
 }
