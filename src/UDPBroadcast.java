@@ -22,7 +22,8 @@ public class UDPBroadcast implements Runnable
 			DatagramSocket socket = new DatagramSocket();
 
 			byte[] b = new byte[128];
-			b = Binswarm.VERSION.getBytes();
+			String temp = Binswarm.VERSION + "/" + Preferences.uuid.toString();
+			b = temp.getBytes();
 			DatagramPacket dgram = null;
 			dgram = new DatagramPacket(b, b.length, InetAddress.getByName("255.255.255.255"), 2500);
 			Logger.log("Sending UDP status packet of size " + b.length + " bytes to " + dgram.getAddress() + ':' + dgram.getPort());

@@ -5,6 +5,7 @@ public class Binswarm
 	
 	public static void main(String[] args)
 	{
+		Preferences prefs = new Preferences();
 		GUI theGUI = new GUI();
 		Networking theNetwork = new Networking();
 		Logger logger = new Logger(false, true);
