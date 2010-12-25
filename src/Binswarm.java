@@ -7,5 +7,6 @@ public class Binswarm
 	{
 		GUI theGUI = new GUI();
 		Networking theNetwork = new Networking();
+		Logger logger = new Logger(false, true);
 	}
 }
