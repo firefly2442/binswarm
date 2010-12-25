@@ -16,26 +16,34 @@ public class UDPListener implements Runnable
 
 	public void run()
 	{
-		System.out.println("Listening for UDP packet");
+		Logger.log("Listening for UDP packets...");
 		
 		DatagramSocket socket;
 		try {
 			socket = new DatagramSocket(2500);
-			byte[] receiveData = new byte[1024];
+			byte[] receiveData = new byte[128];
 			
 			while (true)
 			{
 				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 				try {
 					socket.receive(receivePacket);
-					String sentence = new String(receivePacket.getData());
+					String version = new String(receivePacket.getData());
 					InetAddress IPAddress = receivePacket.getAddress();
-					int port = receivePacket.getPort();
-					System.out.println("Received: " + sentence);
-					System.out.println("From: " + IPAddress.toString() + ":" + port);
+					Logger.log("Received UDP status from: " + IPAddress.toString() + " running version: " + version);
 					
-					//TODO
-					//if this is a new computer that is not in our list, send a reply
+					//if the computer is running the same version we are
+					if (version.equals(Binswarm.VERSION))
+					{
+						//if this is a new computer that is not in our list, send a reply
+						//if (Networking.computerInList(uuid);
+					
+						//otherwise, update timestamp
+					}
+					else
+					{
+						Logger.log("Received UDP status from: " + IPAddress.toString() + ", but they are running a different version.");
+					}
 					
 				} catch (IOException e) {
 					e.printStackTrace();
