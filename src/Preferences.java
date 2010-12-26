@@ -17,6 +17,12 @@ import org.xml.sax.SAXException;
 public class Preferences
 {
 	public static UUID uuid;
+	public static int UDPStatusPort;
+	public static int TCPDataPort;
+	public static int BroadcastInterval; //time (in seconds)
+	public static int CountDowntoRemoval; //time (in seconds)
+	public static boolean LogToFile;
+	public static boolean PrintToConsole;
 	
 	public Preferences()
 	{
@@ -33,10 +39,39 @@ public class Preferences
 				out.write("<Settings>\n");
 					out.write("<Preferences>\n");
 						out.write("<UUID>\n");
-							//generate UUID
+							//generate UUID since this is the first time the program has been run
 							uuid = UUID.randomUUID();
-						out.write(uuid.toString() + "\n");
+							out.write(uuid.toString() + "\n");
 						out.write("</UUID>\n");
+						out.write("<UDPStatusPort\n>");
+							UDPStatusPort = 2500;
+							out.write(UDPStatusPort + "\n");
+						out.write("</UDPStatusPort\n>");
+						out.write("<TCPDataPort\n>");
+							TCPDataPort = 2501;
+							out.write(TCPDataPort + "\n");
+						out.write("</TCPDataPort\n>");
+						out.write("<BroadcastInterval>\n");
+							//time (in seconds) between sending UDP status messages
+							BroadcastInterval = 30;
+							out.write(BroadcastInterval + "\n");
+						out.write("</BroadcastInterval>\n");
+						out.write("<CountDowntoRemoval>\n");
+							//time (in seconds) before we remove a computer from our listing
+							//after not getting a UDP status message from it
+							CountDowntoRemoval = 180;
+							out.write(CountDowntoRemoval + "\n");
+						out.write("</CountDowntoRemoval>\n");
+						out.write("<LogToFile>\n");
+							//whether or not the logger saves output to file
+							LogToFile = false;
+							out.write("false");
+						out.write("</LogToFile>\n");
+						out.write("<PrintToConsole>\n");
+							//whether or not the logger prints output to console
+							PrintToConsole = true;
+							out.write("true");
+						out.write("</PrintToConsole>\n");
 					out.write("</Preferences>\n");
 				out.write("</Settings>\n");
 				

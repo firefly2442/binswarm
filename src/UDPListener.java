@@ -20,7 +20,7 @@ public class UDPListener implements Runnable
 		
 		DatagramSocket socket;
 		try {
-			socket = new DatagramSocket(2500);
+			socket = new DatagramSocket(Preferences.UDPStatusPort);
 			byte[] receiveData = new byte[128];
 			
 			while (true)

@@ -25,7 +25,7 @@ public class UDPBroadcast implements Runnable
 			String temp = Binswarm.VERSION + "/" + Preferences.uuid.toString();
 			b = temp.getBytes();
 			DatagramPacket dgram = null;
-			dgram = new DatagramPacket(b, b.length, InetAddress.getByName("255.255.255.255"), 2500);
+			dgram = new DatagramPacket(b, b.length, InetAddress.getByName("255.255.255.255"), Preferences.UDPStatusPort);
 			Logger.log("Sending UDP status packet of size " + b.length + " bytes to " + dgram.getAddress() + ':' + dgram.getPort());
 			socket.send(dgram);
 		} catch (Exception e) {
@@ -45,6 +45,6 @@ public class UDPBroadcast implements Runnable
 	public void run()
 	{
 		//if a certain amount of time has gone by, send out a broadcast
-		start(10); //run every 10 seconds
+		start(Preferences.BroadcastInterval);
 	}
 }

@@ -3,8 +3,6 @@ import java.util.Calendar;
 
 public class Logger
 {
-	public static boolean log_to_file;
-	public static boolean print_to_console;
 	private static Calendar cal = Calendar.getInstance();
 	
 	public Logger()
@@ -16,7 +14,7 @@ public class Logger
 	
 	public static void log(String message)
 	{
-		if (log_to_file)
+		if (Preferences.LogToFile)
 		{
 			
 		}
@@ -25,7 +23,7 @@ public class Logger
 			
 		}
 		
-		if (print_to_console)
+		if (Preferences.PrintToConsole)
 		{
 			System.out.println(cal.get(Calendar.MONTH)+1 + "/" + cal.get(Calendar.DAY_OF_MONTH) + "/" + cal.get(Calendar.YEAR) + " - " + message);
 		}
