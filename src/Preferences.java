@@ -64,13 +64,13 @@ public class Preferences
 						out.write("</CountDowntoRemoval>\n");
 						out.write("<LogToFile>\n");
 							//whether or not the logger saves output to file
-							LogToFile = false;
-							out.write("false");
+							LogToFile = true;
+							out.write("true\n");
 						out.write("</LogToFile>\n");
 						out.write("<PrintToConsole>\n");
 							//whether or not the logger prints output to console
 							PrintToConsole = true;
-							out.write("true");
+							out.write("true\n");
 						out.write("</PrintToConsole>\n");
 					out.write("</Preferences>\n");
 				out.write("</Settings>\n");
@@ -115,7 +115,7 @@ public class Preferences
 		}
 	}
 	
-	private void saveXMLFile()
+	public void saveXMLFile()
 	{
 		
 	}
