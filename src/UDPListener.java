@@ -38,7 +38,7 @@ public class UDPListener implements Runnable
 						//if this is a new computer that is not in our list, send a reply
 						//if (Networking.computerInList(uuid);
 					
-						//otherwise, update timestamp
+						//otherwise, update timestamp, IP, and other information
 					}
 					else
 					{

@@ -3,16 +3,16 @@ import java.util.Calendar;
 
 public class Logger
 {
-	private static boolean log_to_file;
-	private static boolean print_to_console;
-	private static Calendar cal;
+	public static boolean log_to_file;
+	public static boolean print_to_console;
+	private static Calendar cal = Calendar.getInstance();
 	
-	public Logger(boolean log_file, boolean print_console)
+	public Logger()
 	{
-		log_to_file = log_file;
-		print_to_console = print_console;
-		cal = Calendar.getInstance();
+		//Constructor - no-op
 	}
+	
+	
 	
 	public static void log(String message)
 	{

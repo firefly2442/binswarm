@@ -30,13 +30,15 @@ public class Preferences
 				FileWriter fstream = new FileWriter("preferences.xml");
 				BufferedWriter out = new BufferedWriter(fstream);
 				out.write("<?xml version='1.0' encoding='UTF-8'?>\n");
-				out.write("<Preferences>\n");
-					out.write("<UUID>\n");
-						//generate UUID
-						uuid = UUID.randomUUID();
-					out.write(uuid.toString() + "\n");
-					out.write("</UUID>\n");
-				out.write("</Preferences>\n");
+				out.write("<Settings>\n");
+					out.write("<Preferences>\n");
+						out.write("<UUID>\n");
+							//generate UUID
+							uuid = UUID.randomUUID();
+						out.write(uuid.toString() + "\n");
+						out.write("</UUID>\n");
+					out.write("</Preferences>\n");
+				out.write("</Settings>\n");
 				
 				out.close();
 			}
@@ -58,16 +60,14 @@ public class Preferences
 			
 			//grab the elements in preferences
 			Element docEle = dom.getDocumentElement();
+			System.out.println("here");
 			
 			NodeList nl = docEle.getElementsByTagName("Preferences");
-			if (nl != null && nl.getLength() > 0)
+			for (int i = 0; i < nl.getLength(); i++)
 			{
-				for (int i = 0 ; i < nl.getLength(); i++)
-				{
-					//get the element
-					Element el = (Element)nl.item(i);
-					el.toString();
-				}
+				//get the element
+				Element el = (Element)nl.item(i);
+				System.out.println("element: " + el.getNodeValue());
 			}
 			
 		}
