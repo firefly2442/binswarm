@@ -1,3 +1,4 @@
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,9 +30,16 @@ public class Log
 		{
 			try
 			{
+				//check and see if there is a log directory, if not create one
+				if (!(new File("./logs/")).exists())
+					if (!(new File("./logs/")).mkdir())
+						Log.log("Unable to create 'logs' directory, check permissions", Level.SEVERE);
+					else
+						Log.log("Creating 'logs' directory to save log files", Level.INFO);
+				
 				//Setup log file for writing to
 				logfile = "log_" + cal.hashCode() + ".html";
-			    fh = new FileHandler(logfile);
+			    fh = new FileHandler("./logs/" + logfile);
 			    fh.setFormatter(new HTMLLogFormat());
 			    logger = Logger.getLogger(logfile);
 			    if (!Preferences.PrintToConsole)
