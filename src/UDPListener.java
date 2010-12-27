@@ -3,6 +3,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.logging.Level;
 
 
 public class UDPListener implements Runnable
@@ -16,7 +17,7 @@ public class UDPListener implements Runnable
 
 	public void run()
 	{
-		Logger.log("Listening for UDP packets...");
+		Log.log("Listening for UDP packets...", Level.INFO);
 		
 		DatagramSocket socket;
 		try {
@@ -30,7 +31,7 @@ public class UDPListener implements Runnable
 					socket.receive(receivePacket);
 					String version = new String(receivePacket.getData());
 					InetAddress IPAddress = receivePacket.getAddress();
-					Logger.log("Received UDP status from: " + IPAddress.toString() + " running version: " + version);
+					Log.log("Received UDP status from: " + IPAddress.toString() + " running version: " + version, Level.INFO);
 					
 					//if the computer is running the same version we are
 					if (version.equals(Binswarm.VERSION))
@@ -42,7 +43,7 @@ public class UDPListener implements Runnable
 					}
 					else
 					{
-						Logger.log("Received UDP status from: " + IPAddress.toString() + ", but they are running a different version.");
+						Log.log("Received UDP status from: " + IPAddress.toString() + ", but they are running a different version.", Level.INFO);
 					}
 					
 				} catch (IOException e) {

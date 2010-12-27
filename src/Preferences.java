@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.logging.Level;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -76,6 +77,7 @@ public class Preferences
 				out.write("</Settings>\n");
 				
 				out.close();
+				Log.log("New preferences.xml file created", Level.INFO);
 			}
 			catch (Exception e) {
 				  System.err.println("Error: " + e.getMessage());
@@ -95,7 +97,6 @@ public class Preferences
 			
 			//grab the elements in preferences
 			Element docEle = dom.getDocumentElement();
-			System.out.println("here");
 			
 			NodeList nl = docEle.getElementsByTagName("Preferences");
 			for (int i = 0; i < nl.getLength(); i++)
@@ -106,11 +107,13 @@ public class Preferences
 			}
 			
 		}
-		catch(ParserConfigurationException pce) {
+		catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
-		}catch(SAXException se) {
+		}
+		catch (SAXException se) {
 			se.printStackTrace();
-		}catch(IOException ioe) {
+		}
+		catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}

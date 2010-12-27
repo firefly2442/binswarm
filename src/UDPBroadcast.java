@@ -3,6 +3,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
 
 
 public class UDPBroadcast implements Runnable
@@ -26,7 +27,7 @@ public class UDPBroadcast implements Runnable
 			b = temp.getBytes();
 			DatagramPacket dgram = null;
 			dgram = new DatagramPacket(b, b.length, InetAddress.getByName("255.255.255.255"), Preferences.UDPStatusPort);
-			Logger.log("Sending UDP status packet of size " + b.length + " bytes to " + dgram.getAddress() + ':' + dgram.getPort());
+			Log.log("Sending UDP status packet of size " + b.length + " bytes to " + dgram.getAddress() + ':' + dgram.getPort(), Level.INFO);
 			socket.send(dgram);
 		} catch (Exception e) {
 			e.printStackTrace();
