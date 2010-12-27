@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -80,7 +81,7 @@ public class Preferences
 				Log.log("New preferences.xml file created", Level.INFO);
 			}
 			catch (Exception e) {
-				  System.err.println("Error: " + e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		
@@ -95,15 +96,52 @@ public class Preferences
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document dom = db.parse("preferences.xml");
 			
-			//grab the elements in preferences
-			Element docEle = dom.getDocumentElement();
-			
-			NodeList nl = docEle.getElementsByTagName("Preferences");
+			NodeList nl = dom.getElementsByTagName("Preferences");
 			for (int i = 0; i < nl.getLength(); i++)
 			{
-				//get the element
-				Element el = (Element)nl.item(i);
-				System.out.println("element: " + el.getNodeValue());
+				Node firstnode = nl.item(i);
+				if (firstnode.getNodeType() == Node.ELEMENT_NODE)
+				{
+					Element element = (Element)firstnode;
+					NodeList ElementList;
+					Element singleElement;
+					NodeList theChildrenElements;
+					
+					ElementList = element.getElementsByTagName("UUID");
+					singleElement = (Element)ElementList.item(0);
+					theChildrenElements = singleElement.getChildNodes();
+					uuid = UUID.fromString(((Node)theChildrenElements.item(0)).getNodeValue().trim());
+					
+					ElementList = element.getElementsByTagName("UDPStatusPort");
+					singleElement = (Element)ElementList.item(0);
+					theChildrenElements = singleElement.getChildNodes();
+					UDPStatusPort = Integer.parseInt(((Node)theChildrenElements.item(0)).getNodeValue().trim());
+					
+					ElementList = element.getElementsByTagName("TCPDataPort");
+					singleElement = (Element)ElementList.item(0);
+					theChildrenElements = singleElement.getChildNodes();
+					TCPDataPort = Integer.parseInt(((Node)theChildrenElements.item(0)).getNodeValue().trim());
+					
+					ElementList = element.getElementsByTagName("BroadcastInterval");
+					singleElement = (Element)ElementList.item(0);
+					theChildrenElements = singleElement.getChildNodes();
+					BroadcastInterval = Integer.parseInt(((Node)theChildrenElements.item(0)).getNodeValue().trim());
+					
+					ElementList = element.getElementsByTagName("CountDowntoRemoval");
+					singleElement = (Element)ElementList.item(0);
+					theChildrenElements = singleElement.getChildNodes();
+					CountDowntoRemoval = Integer.parseInt(((Node)theChildrenElements.item(0)).getNodeValue().trim());
+					
+					ElementList = element.getElementsByTagName("LogToFile");
+					singleElement = (Element)ElementList.item(0);
+					theChildrenElements = singleElement.getChildNodes();
+					LogToFile = Boolean.valueOf(((Node)theChildrenElements.item(0)).getNodeValue().trim());
+					
+					ElementList = element.getElementsByTagName("PrintToConsole");
+					singleElement = (Element)ElementList.item(0);
+					theChildrenElements = singleElement.getChildNodes();
+					PrintToConsole = Boolean.valueOf(((Node)theChildrenElements.item(0)).getNodeValue().trim());
+				}
 			}
 			
 		}
@@ -116,6 +154,8 @@ public class Preferences
 		catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
+		
+		Log.log("Finished loading preferences.xml file", Level.INFO);
 	}
 	
 	public void saveXMLFile()
