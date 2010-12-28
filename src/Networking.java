@@ -17,6 +17,7 @@ public class Networking
 	
 	public static void addComputer(UUID uuid, String IPAddress)
 	{
+		Log.log("Computer added to listing with IP: " + IPAddress + " and UUID: " + uuid.toString(), Level.INFO);
 		computers.add(new Computer(uuid, IPAddress));
 	}
 	
@@ -26,6 +27,7 @@ public class Networking
 		{
 			if (computers.get(i).uuid == uuid)
 			{
+				Log.log("Computer removed from listing with UUID: " + uuid.toString(), Level.INFO);
 				computers.remove(i);
 				break;
 			}
@@ -54,6 +56,7 @@ public class Networking
 			{
 				computers.get(i).IPAddress = IP;
 				computers.get(i).updateTimeStamp(); //update the time
+				Log.log("Computer in list updated with IP: " + IP + " and UUID: " + uuid.toString(), Level.INFO);
 				return;
 			}
 		}
