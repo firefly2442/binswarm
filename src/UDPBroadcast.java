@@ -17,7 +17,7 @@ public class UDPBroadcast implements Runnable
 		broadcastThread.start();
 	}
 	
-	public void sendBroadcast()
+	public static void sendBroadcast()
 	{
 		try {
 			DatagramSocket socket = new DatagramSocket();
