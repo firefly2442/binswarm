@@ -1,5 +1,6 @@
 import java.util.UUID;
 import java.util.Vector;
+import java.util.logging.Level;
 
 
 public class Networking
@@ -42,5 +43,21 @@ public class Networking
 			}
 		}
 		return false;
+	}
+	
+	public static void updateList(UUID uuid, String IP)
+	{
+		//updates the specified UUID computer
+		for (int i = 0; i < computers.size(); i++)
+		{
+			if (computers.get(i).uuid.equals(uuid))
+			{
+				computers.get(i).IPAddress = IP;
+				computers.get(i).updateTimeStamp(); //update the time
+				return;
+			}
+		}
+		//should never get here, at this point, the UUID hasn't been found in the list
+		Log.log("Running updateList() method but unable to find the specified UUID.", Level.SEVERE);
 	}
 }
