@@ -43,7 +43,7 @@ public class UDPListener implements Runnable
 					if (version.equals(Binswarm.VERSION))
 					{
 						//make sure we don't add messages from ourself to the listing
-						if (!version.equals(Preferences.uuid.toString()))
+						if (!universalID.equals(Preferences.uuid.toString()))
 						{
 							//if this is a new computer that is not in our list, send a reply
 							if (!Networking.computerInList(UUID.fromString(universalID)))
