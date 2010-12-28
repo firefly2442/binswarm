@@ -39,7 +39,7 @@ public class UDPListener implements Runnable
 					InetAddress IPAddress = receivePacket.getAddress();
 					Log.log("Received UDP status from: " + IPAddress.toString() + " running version: " + version, Level.INFO);
 					
-					//if the computer is running the same version we are and it's not ourselves sending the message...
+					//if the computer is running the same version we are
 					if (version.equals(Binswarm.VERSION))
 					{
 						//make sure we don't add messages from ourself to the listing
