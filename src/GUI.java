@@ -1,86 +1,64 @@
+import java.awt.BorderLayout;
 
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
 
 public class GUI
 {
-    public GUI()
-    {
-        final TrayIcon trayIcon;
-
-        if (SystemTray.isSupported())
-        {
-
-            SystemTray tray = SystemTray.getSystemTray();
-            Image image = Toolkit.getDefaultToolkit().getImage("tray.gif");
-
-            MouseListener mouseListener = new MouseListener() {
-                
-                public void mouseClicked(MouseEvent e) {
-                    System.out.println("Tray Icon - Mouse clicked!");
-                }
-                public void mouseEntered(MouseEvent e) {
-                    System.out.println("Tray Icon - Mouse entered!");
-                }
-                public void mouseExited(MouseEvent e) {
-                    System.out.println("Tray Icon - Mouse exited!");
-                }
-                public void mousePressed(MouseEvent e) {
-                    System.out.println("Tray Icon - Mouse pressed!");
-                }
-                public void mouseReleased(MouseEvent e) {
-                    System.out.println("Tray Icon - Mouse released!");     
-                }
-
-            };
-
-            ActionListener exitListener = new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                	//Exit the app
-                    System.exit(0);
-                }
-            };
-            
-            ActionListener showStatusListener = new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                    //Show status
-                }
-            };
-            
-            PopupMenu popup = new PopupMenu();
-            MenuItem exitItem = new MenuItem("Exit");
-            MenuItem showStatusItem = new MenuItem("Show Status");
-            showStatusItem.addActionListener(showStatusListener);
-            exitItem.addActionListener(exitListener);
-            popup.add(showStatusItem);
-            popup.add(exitItem);
-
-            trayIcon = new TrayIcon(image, "BinSwarm", popup);
-
-            ActionListener actionListener = new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    trayIcon.displayMessage("Action Event", 
-                        "An Action Event Has Been Peformed!",
-                        TrayIcon.MessageType.INFO);
-                }
-            };
-            
-            trayIcon.setImageAutoSize(true);
-            trayIcon.addActionListener(actionListener);
-            trayIcon.addMouseListener(mouseListener);
-
-            try {
-                  tray.add(trayIcon);
-            } catch (AWTException e) {
-                System.err.println("TrayIcon could not be added.");
+	public static JFrame frame; //1st level
+		public static JTabbedPane tabbedPane; //2nd level
+			//3rd level
+			public static JPanel clusterPane;
+			public static JPanel networkPane;
+			public static JPanel localcomputerPane;
+			public static JPanel searchPane;
+			public static JPanel preferencesPane;
+			public static JPanel helpPane;
+			public static JPanel aboutPane;
+	
+	public GUI()
+	{
+		//Constructor
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createGUI();
             }
+        });
+	}
+	
+	private void createGUI()
+	{
+		frame = new JFrame("BinSwarm");
+        frame.setLayout(new BorderLayout());
+        
+        //make sure the application doesn't exit upon closing the window
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        
+        tabbedPane = new JTabbedPane();
+        
+        clusterPane = new JPanel();
+        tabbedPane.addTab("Cluster Status", new ImageIcon("images/cluster_status.png"), clusterPane, "Shows network cluster status");
+        networkPane = new JPanel();
+        tabbedPane.addTab("Network Status", new ImageIcon("images/network_status.png"), networkPane, "Shows network traffic information");
+        localcomputerPane = new JPanel();
+        tabbedPane.addTab("Local Computer", new ImageIcon("images/local_computer.png"), localcomputerPane, "Setup and show bins for local computer");
+        searchPane = new JPanel();
+        tabbedPane.addTab("Search", new ImageIcon("images/search.png"), searchPane, "Search for files across the cluster");
+        preferencesPane = new JPanel();
+        tabbedPane.addTab("Preferences", new ImageIcon("images/preferences.png"), preferencesPane, "Setup BinSwarm preferences");
+        helpPane = new JPanel();
+        tabbedPane.addTab("Help", new ImageIcon("images/help.png"), helpPane, "Get help for running BinSwarm");
+        aboutPane = new JPanel();
+        tabbedPane.addTab("About", new ImageIcon("images/about.png"), aboutPane, "Shows information about BinSwarm");
 
-        } else {
-            System.err.println("System tray is currently not supported.");
-        }
-    }    
+        
+        frame.add(tabbedPane);
+
+        frame.setSize(640, 480);
+        
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+	}
 }
