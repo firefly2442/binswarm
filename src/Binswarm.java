@@ -7,6 +7,7 @@ public class Binswarm
 	{
 		Preferences prefs = new Preferences();
 		GUI theGUI = new GUI();
+		TrayGUI trayGUI = new TrayGUI();
 		Networking theNetwork = new Networking();
 	}
 }
