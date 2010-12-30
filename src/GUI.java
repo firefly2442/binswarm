@@ -8,8 +8,9 @@ import javax.swing.JTabbedPane;
 
 public class GUI
 {
-	public static JFrame frame;
-		public static JTabbedPane tabbedPane;
+	public static JFrame frame; //1st level
+		public static JTabbedPane tabbedPane; //2nd level
+			//3rd level
 			public static JPanel clusterPane;
 			public static JPanel networkPane;
 			public static JPanel localcomputerPane;
@@ -58,7 +59,6 @@ public class GUI
 
         frame.setSize(640, 480);
         
-      //The following line enables to use scrolling tabs.
-      tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 	}
 }
