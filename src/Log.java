@@ -1,3 +1,4 @@
+import java.awt.TrayIcon;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -62,6 +63,12 @@ public class Log
 			catch (Exception e) {
 				System.err.println("Error: " + e.getMessage());
 			}
+		}
+		
+		if (leveltype.intValue() >= Level.WARNING.intValue())
+		{
+			//any level >= Warning gets displayed in the tray icon
+			TrayGUI.trayIcon.displayMessage("Warning", message, TrayIcon.MessageType.WARNING);
 		}
 	}
 }

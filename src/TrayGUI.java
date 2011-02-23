@@ -4,13 +4,14 @@ import java.awt.event.*;
 
 public class TrayGUI
 {
+	public static TrayIcon trayIcon;
+	
     public TrayGUI()
     {
-        final TrayIcon trayIcon;
-
+    	//Constructor
+    	
         if (SystemTray.isSupported())
         {
-
             SystemTray tray = SystemTray.getSystemTray();
             Image image = Toolkit.getDefaultToolkit().getImage("images/tray.gif");
 
@@ -62,16 +63,7 @@ public class TrayGUI
 
             trayIcon = new TrayIcon(image, "BinSwarm", popup);
 
-            ActionListener actionListener = new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    trayIcon.displayMessage("Action Event", 
-                        "An Action Event Has Been Peformed!",
-                        TrayIcon.MessageType.INFO);
-                }
-            };
-            
             trayIcon.setImageAutoSize(true);
-            trayIcon.addActionListener(actionListener);
             trayIcon.addMouseListener(mouseListener);
 
             try {
