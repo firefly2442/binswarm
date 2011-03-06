@@ -34,6 +34,19 @@ public class Networking
 		}
 	}
 	
+	public static void removeOldComputers()
+	{
+		//Remove stale listings
+		for (int i = 0; i < computers.size(); i++)
+		{
+			long diff = (System.currentTimeMillis() - computers.get(i).timeStamp)/1000;
+			if (diff > Preferences.CountDowntoRemoval)
+			{
+				removeComputer(computers.get(i).uuid);
+			}
+		}
+	}
+	
 	public static boolean computerInList(UUID uuid)
 	{
 		//Check to see if a computer is already in our listing
