@@ -37,7 +37,7 @@ public class UDPListener implements Runnable
 					String universalID = tokens.nextToken();
 					
 					InetAddress IPAddress = receivePacket.getAddress();
-					Log.log("Received UDP status from: " + IPAddress.toString() + " running version: " + version, Level.INFO);
+					Log.log("Received UDP status from: " + IPAddress.toString().replaceAll("/", "") + " running version: " + version, Level.INFO);
 					
 					//if the computer is running the same version we are
 					if (version.equals(Binswarm.VERSION))
@@ -50,18 +50,18 @@ public class UDPListener implements Runnable
 							{
 								UDPBroadcast.sendBroadcast();
 								//and create a new computer and add it to the list
-								Networking.addComputer(UUID.fromString(universalID), IPAddress.toString());
+								Networking.addComputer(UUID.fromString(universalID), IPAddress.toString().replaceAll("/", ""));
 							}
 							else
 							{
 								//the computer already is in the list, so update timestamp, IP, and other information
-								Networking.updateList(UUID.fromString(universalID), IPAddress.toString());
+								Networking.updateList(UUID.fromString(universalID), IPAddress.toString().replaceAll("/", ""));
 							}
 						}
 					}
 					else
 					{
-						Log.log("Received UDP status from: " + IPAddress.toString() + ", but they are running a different version: (" + version + ")", Level.INFO);
+						Log.log("Received UDP status from: " + IPAddress.toString().replaceAll("/", "") + ", but they are running a different version: (" + version + ")", Level.INFO);
 					}
 					
 				} catch (IOException e) {

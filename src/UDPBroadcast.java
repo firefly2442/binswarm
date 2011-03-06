@@ -26,8 +26,9 @@ public class UDPBroadcast implements Runnable
 			String temp = Binswarm.VERSION + "/" + Preferences.uuid.toString();
 			b = temp.getBytes();
 			DatagramPacket dgram = null;
+			///@todo: This needs to be changed so the broadcast doesn't go too far.
 			dgram = new DatagramPacket(b, b.length, InetAddress.getByName("255.255.255.255"), Preferences.UDPStatusPort);
-			Log.log("Sending UDP status packet of size " + b.length + " bytes to " + dgram.getAddress() + ':' + dgram.getPort(), Level.INFO);
+			Log.log("Sending UDP status packet of size " + b.length + " bytes to " + dgram.getAddress().toString().replaceAll("/", "") + ':' + dgram.getPort(), Level.INFO);
 			socket.send(dgram);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,6 +39,7 @@ public class UDPBroadcast implements Runnable
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 sendBroadcast();
+                Networking.removeOldComputers();
             }
         }, 0, seconds * 1000);
     }
