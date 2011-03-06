@@ -17,7 +17,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -40,6 +42,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&nbsp;List</span></a></li>
       <li><a href="classes.html"><span>Class&nbsp;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&nbsp;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -49,14 +52,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="classGUI.html">GUI</a>, including all inherited members.<table>
-  <tr bgcolor="#f0f0f0"><td><b>GUI</b>() (defined in <a class="el" href="classGUI.html">GUI</a>)</td><td><a class="el" href="classGUI.html">GUI</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#a81f6026b22fac11f067d39ce2d940946">aboutPane</a></td><td><a class="el" href="classGUI.html">GUI</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#a57b1666069923aa2f0f8fa1973df5e2a">clusterPane</a></td><td><a class="el" href="classGUI.html">GUI</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#abf0afaf640323e8a684348398a77ae0c">createGUI</a>()</td><td><a class="el" href="classGUI.html">GUI</a></td><td><code> [private]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#a1b0e3072ab3ce7670497e4badd8b60da">frame</a></td><td><a class="el" href="classGUI.html">GUI</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#a35a15f9dcfca9111335e4401a46567ed">GUI</a>()</td><td><a class="el" href="classGUI.html">GUI</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#aab4eb284f834f17656976e66f671a103">helpPane</a></td><td><a class="el" href="classGUI.html">GUI</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#a5afb133c93b35ffc375acc682e211b07">localcomputerPane</a></td><td><a class="el" href="classGUI.html">GUI</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#ae10613f27c507a93696a8b9debb010a0">networkPane</a></td><td><a class="el" href="classGUI.html">GUI</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#aedbe88025ea109abd60d833affd82f7f">preferencesPane</a></td><td><a class="el" href="classGUI.html">GUI</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#a3555dbd7fbe8085069fc0a0f87051cc2">searchPane</a></td><td><a class="el" href="classGUI.html">GUI</a></td><td><code> [static]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classGUI.html#af6842186e945cbbded5c3253da6d1651">tabbedPane</a></td><td><a class="el" href="classGUI.html">GUI</a></td><td><code> [static]</code></td></tr>
 </table></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -65,7 +78,7 @@ This is the complete list of members for <a class="el" href="classGUI.html">GUI<
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:51:26 for binswarm by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Mar 5 2011 23:13:37 for binswarm by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

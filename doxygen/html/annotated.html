@@ -17,7 +17,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -40,6 +42,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li class="current"><a href="annotated.html"><span>Class&nbsp;List</span></a></li>
       <li><a href="classes.html"><span>Class&nbsp;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&nbsp;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -52,11 +55,15 @@ Here are the classes, structs, unions and interfaces with brief descriptions:<ta
   <tr><td class="indexkey"><a class="el" href="classBinswarm.html">Binswarm</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey"><a class="el" href="classComputer.html">Computer</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey"><a class="el" href="classGUI.html">GUI</a></td><td class="indexvalue"></td></tr>
-  <tr><td class="indexkey"><a class="el" href="classLogger.html">Logger</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey"><a class="el" href="classHTMLLogFormat.html">HTMLLogFormat</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey"><a class="el" href="classLog.html">Log</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey"><a class="el" href="classNetworking.html">Networking</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey"><a class="el" href="classPreferences.html">Preferences</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey"><a class="el" href="classTrayGUI.html">TrayGUI</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey"><a class="el" href="classUDPBroadcast.html">UDPBroadcast</a></td><td class="indexvalue"></td></tr>
   <tr><td class="indexkey"><a class="el" href="classUDPListener.html">UDPListener</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey"><a class="el" href="classupdateGUI.html">updateGUI</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey"><a class="el" href="classWindowEventHandler.html">WindowEventHandler</a></td><td class="indexvalue"></td></tr>
 </table>
 </div>
 <!--- window showing the filter options -->
@@ -64,7 +71,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:<ta
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -73,7 +80,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:<ta
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:51:26 for binswarm by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Mar 5 2011 23:13:37 for binswarm by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

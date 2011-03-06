@@ -17,7 +17,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&nbsp;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -40,35 +42,201 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&nbsp;List</span></a></li>
       <li><a href="classes.html"><span>Class&nbsp;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&nbsp;Members</span></a></li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a>  </div>
   <div class="headertitle">
 <h1>Networking Class Reference</h1>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="Networking" -->
+<!-- doxytag: class="Networking" --><div class="dynheader">
+Collaboration diagram for Networking:</div>
+<div class="dyncontent">
+<div class="center"><img src="classNetworking__coll__graph.png" border="0" usemap="#Networking_coll__map" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+
 <p><a href="classNetworking-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworking.html#a701485b92646c47eef8d32f2db315059">Networking</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a808679f29e6df7cd30780750749bb989"></a><!-- doxytag: member="Networking::addComputer" ref="a808679f29e6df7cd30780750749bb989" args="(UUID uuid, String IPAddress)" -->
-static void&nbsp;</td><td class="memItemRight" valign="bottom"><b>addComputer</b> (UUID uuid, String IPAddress)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2f917b7670653d5e6d88245a92b6ddb"></a><!-- doxytag: member="Networking::removeComputer" ref="aa2f917b7670653d5e6d88245a92b6ddb" args="(UUID uuid)" -->
-static void&nbsp;</td><td class="memItemRight" valign="bottom"><b>removeComputer</b> (UUID uuid)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2269d16e5efb56829a72958f0ae3d42f"></a><!-- doxytag: member="Networking::computerInList" ref="a2269d16e5efb56829a72958f0ae3d42f" args="(UUID uuid)" -->
-static boolean&nbsp;</td><td class="memItemRight" valign="bottom"><b>computerInList</b> (UUID uuid)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworking.html#a808679f29e6df7cd30780750749bb989">addComputer</a> (UUID uuid, String IPAddress)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworking.html#aa2f917b7670653d5e6d88245a92b6ddb">removeComputer</a> (UUID uuid)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworking.html#a89b4ac11952d8b3738fe4eaa602ddccb">removeOldComputers</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static boolean&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworking.html#a2269d16e5efb56829a72958f0ae3d42f">computerInList</a> (UUID uuid)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworking.html#a960655ab46551e2bd3d75269db8dd8ea">updateList</a> (UUID uuid, String IP)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23e5559f170e8f49dd5d8d3b97a5f1e6"></a><!-- doxytag: member="Networking::computers" ref="a23e5559f170e8f49dd5d8d3b97a5f1e6" args="" -->
-static Vector&lt; <a class="el" href="classComputer.html">Computer</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><b>computers</b> = new Vector&lt;<a class="el" href="classComputer.html">Computer</a>&gt;()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static Vector&lt; <a class="el" href="classComputer.html">Computer</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetworking.html#a23e5559f170e8f49dd5d8d3b97a5f1e6">computers</a> = new Vector&lt;<a class="el" href="classComputer.html">Computer</a>&gt;()</td></tr>
 </table>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a701485b92646c47eef8d32f2db315059"></a><!-- doxytag: member="Networking::Networking" ref="a701485b92646c47eef8d32f2db315059" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Networking.Networking </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a808679f29e6df7cd30780750749bb989"></a><!-- doxytag: member="Networking::addComputer" ref="a808679f29e6df7cd30780750749bb989" args="(UUID uuid, String IPAddress)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Networking.addComputer </td>
+          <td>(</td>
+          <td class="paramtype">UUID&nbsp;</td>
+          <td class="paramname"> <em>uuid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&nbsp;</td>
+          <td class="paramname"> <em>IPAddress</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2269d16e5efb56829a72958f0ae3d42f"></a><!-- doxytag: member="Networking::computerInList" ref="a2269d16e5efb56829a72958f0ae3d42f" args="(UUID uuid)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static boolean Networking.computerInList </td>
+          <td>(</td>
+          <td class="paramtype">UUID&nbsp;</td>
+          <td class="paramname"> <em>uuid</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa2f917b7670653d5e6d88245a92b6ddb"></a><!-- doxytag: member="Networking::removeComputer" ref="aa2f917b7670653d5e6d88245a92b6ddb" args="(UUID uuid)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Networking.removeComputer </td>
+          <td>(</td>
+          <td class="paramtype">UUID&nbsp;</td>
+          <td class="paramname"> <em>uuid</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classNetworking_aa2f917b7670653d5e6d88245a92b6ddb_icgraph.png" border="0" usemap="#classNetworking_aa2f917b7670653d5e6d88245a92b6ddb_icgraph" alt=""/></div>
+<map name="classNetworking_aa2f917b7670653d5e6d88245a92b6ddb_icgraph" id="classNetworking_aa2f917b7670653d5e6d88245a92b6ddb_icgraph">
+<area shape="rect" id="node3" href="classNetworking.html#a89b4ac11952d8b3738fe4eaa602ddccb" title="Networking.removeOldComputers" alt="" coords="265,5,503,35"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a89b4ac11952d8b3738fe4eaa602ddccb"></a><!-- doxytag: member="Networking::removeOldComputers" ref="a89b4ac11952d8b3738fe4eaa602ddccb" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Networking.removeOldComputers </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classNetworking_a89b4ac11952d8b3738fe4eaa602ddccb_cgraph.png" border="0" usemap="#classNetworking_a89b4ac11952d8b3738fe4eaa602ddccb_cgraph" alt=""/></div>
+<map name="classNetworking_a89b4ac11952d8b3738fe4eaa602ddccb_cgraph" id="classNetworking_a89b4ac11952d8b3738fe4eaa602ddccb_cgraph">
+<area shape="rect" id="node3" href="classNetworking.html#aa2f917b7670653d5e6d88245a92b6ddb" title="Networking.removeComputer" alt="" coords="293,5,504,35"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a960655ab46551e2bd3d75269db8dd8ea"></a><!-- doxytag: member="Networking::updateList" ref="a960655ab46551e2bd3d75269db8dd8ea" args="(UUID uuid, String IP)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Networking.updateList </td>
+          <td>(</td>
+          <td class="paramtype">UUID&nbsp;</td>
+          <td class="paramname"> <em>uuid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&nbsp;</td>
+          <td class="paramname"> <em>IP</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a23e5559f170e8f49dd5d8d3b97a5f1e6"></a><!-- doxytag: member="Networking::computers" ref="a23e5559f170e8f49dd5d8d3b97a5f1e6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;<a class="el" href="classComputer.html">Computer</a>&gt; <a class="el" href="classNetworking.html#a23e5559f170e8f49dd5d8d3b97a5f1e6">Networking.computers</a> = new Vector&lt;<a class="el" href="classComputer.html">Computer</a>&gt;()<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Networking.java</li>
+<li>/home/carlsonp/workspace/binswarm/src/<a class="el" href="Networking_8java.html">Networking.java</a></li>
 </ul>
 </div>
 <!--- window showing the filter options -->
@@ -76,7 +244,7 @@ static Vector&lt; <a class="el" href="classComputer.html">Computer</a> &gt;&nbsp
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -85,7 +253,7 @@ static Vector&lt; <a class="el" href="classComputer.html">Computer</a> &gt;&nbsp
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Dec 25 2010 23:51:26 for binswarm by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Mar 5 2011 23:13:37 for binswarm by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>
