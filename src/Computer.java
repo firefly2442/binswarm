@@ -8,21 +8,24 @@ public class Computer
 	public String IPAddress;
 	public long dataStored; //in bytes
 	public long availableStorage; //in bytes
-	public long timeStamp; //the last time we saw this computer
-	
-	private Date date_object;
+	public long timeStamp; //the last time we saw this computer (in milliseconds)
 	
 	public Computer(UUID id, String IP)
 	{
 		//Constructor
 		uuid = id;
 		IPAddress = IP;
-		date_object = new Date();
 		updateTimeStamp();
 	}
 	
 	public void updateTimeStamp()
 	{
-		timeStamp = date_object.getTime();
+		timeStamp = System.currentTimeMillis();
+	}
+	
+	public String returnHumanReadableTimestamp()
+	{
+		String temp_date = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date(timeStamp));
+		return temp_date;
 	}
 }

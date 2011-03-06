@@ -87,9 +87,7 @@ class updateGUI extends SwingWorker<Void, Void>
 	
 	protected Void doInBackground() throws Exception
 	{
-		System.out.println("Starting do background stuff");
 		new Timer(1000, updateTable).start(); //update every second
-
 		return null;
 	}
 	
@@ -102,6 +100,7 @@ class updateGUI extends SwingWorker<Void, Void>
 			DefaultTableModel model = new DefaultTableModel();
 			model.addColumn("UUID");
 			model.addColumn("IP Address");
+			model.addColumn("Last Seen");
 			
 			JTable table = new JTable(model);
 			
@@ -111,7 +110,7 @@ class updateGUI extends SwingWorker<Void, Void>
 
 			for (int i = 0; i < Networking.computers.size(); i++)
 			{
-				model.addRow(new Object[]{Networking.computers.get(i).uuid.toString(), Networking.computers.get(i).IPAddress});
+				model.addRow(new Object[]{Networking.computers.get(i).uuid.toString(), Networking.computers.get(i).IPAddress, Networking.computers.get(i).returnHumanReadableTimestamp()});
 			}
 			
 			GUI.clusterPane.add(clusterScroll, BorderLayout.CENTER);
