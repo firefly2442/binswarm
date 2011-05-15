@@ -1,18 +1,27 @@
+package binswarm;
 import java.util.UUID;
 import java.util.Vector;
 import java.util.logging.Level;
+
+import binswarm.comm.MessageHeader;
+import binswarm.comm.UDPBroadcast;
+import binswarm.comm.UDPListener;
+import binswarm.config.Preferences;
 
 
 public class Networking
 {
 	//all known computers in the network running this app
 	public static Vector<Computer> computers = new Vector<Computer>();
-	
+	UDPBroadcast broadcast = null;
+	UDPListener listener = null;
+	Heartbeat hb = null;
 	public Networking()
 	{
 		//Constructor
-		UDPListener listener = new UDPListener();
-		UDPBroadcast broadcast = new UDPBroadcast();
+		broadcast = new UDPBroadcast(new MessageHeader(Preferences.uuid));
+		listener = new UDPListener();
+		hb = new Heartbeat(broadcast, listener);
 	}
 	
 	public static void addComputer(UUID uuid, String IPAddress)

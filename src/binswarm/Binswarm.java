@@ -1,3 +1,8 @@
+package binswarm;
+
+import binswarm.config.Preferences;
+import binswarm.ui.GUI;
+import binswarm.ui.TrayGUI;
 
 public class Binswarm
 {

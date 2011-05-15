@@ -1,3 +1,4 @@
+package binswarm;
 import java.awt.TrayIcon;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -9,6 +10,9 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
+
+import binswarm.config.Preferences;
+import binswarm.ui.TrayGUI;
 
 
 public class Log

@@ -1,3 +1,4 @@
+package binswarm.ui;
 import java.awt.BorderLayout;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,8 @@ import javax.swing.JTable;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+
+import binswarm.Networking;
 
 public class GUI
 {
