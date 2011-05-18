@@ -92,7 +92,7 @@ public class MulticastComm implements Runnable {
 	
 	private String formatMessage(String messageType, String innerElements)
 	{
-		String message = String.format("<binswarm>%1$<body type='%2$'>%3$</body></binswarm>", header.toXml(), messageType, innerElements);
+		String message = String.format("<binswarm>%1$s<body type='%2$s'>%3$s</body></binswarm>", header.toXml(), messageType, innerElements);
 		return message;
 	}
 	
