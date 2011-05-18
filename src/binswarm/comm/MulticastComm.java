@@ -2,15 +2,11 @@ package binswarm.comm;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.Timer;
 import java.util.UUID;
 import java.util.logging.Level;
 
@@ -24,9 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import binswarm.Binswarm;
 import binswarm.Log;
-import binswarm.XmlHelper;
 
 
 public class MulticastComm implements Runnable {
@@ -37,7 +31,6 @@ public class MulticastComm implements Runnable {
 	InetAddress group;
 	MulticastSocket socket = null;
 	int port = 0;
-	private final Timer timer = new Timer();
 	
 	public MulticastComm(UUID uuid, String groupAddress, int port)
 	{ 
@@ -54,10 +47,8 @@ public class MulticastComm implements Runnable {
 			socket = new MulticastSocket(port);
 			socket.setTimeToLive(ttl);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.listeners = new HashMap<String, MessageListener>();
@@ -80,7 +71,6 @@ public class MulticastComm implements Runnable {
 			
 			success = true;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			success = false;
 		}
@@ -94,7 +84,6 @@ public class MulticastComm implements Runnable {
 			socket.leaveGroup(group);
 			success = true;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			success = false;
 		}
@@ -114,7 +103,6 @@ public class MulticastComm implements Runnable {
 		try {
 			socket.send(data);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}

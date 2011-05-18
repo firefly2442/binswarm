@@ -2,7 +2,6 @@ package binswarm;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.UUID;
 import java.util.logging.Level;
 
 import org.w3c.dom.NodeList;

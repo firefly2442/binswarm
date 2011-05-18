@@ -7,8 +7,6 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.UUID;
 import java.util.logging.Level;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -21,9 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import binswarm.Binswarm;
 import binswarm.Log;
-import binswarm.Networking;
 import binswarm.config.Preferences;
 
 

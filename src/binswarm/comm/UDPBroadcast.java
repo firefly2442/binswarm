@@ -5,20 +5,12 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.UUID;
-import java.util.logging.Level;
 
-import binswarm.Binswarm;
-import binswarm.Log;
-import binswarm.Networking;
 import binswarm.config.Preferences;
 
 
 public class UDPBroadcast
 {
-	private final Timer timer = new Timer();
 	MessageHeader header;
 	DatagramSocket socket;
 	
@@ -28,7 +20,6 @@ public class UDPBroadcast
 		try {
 			socket = new DatagramSocket();
 		} catch (SocketException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -47,10 +38,8 @@ public class UDPBroadcast
 			data = new DatagramPacket(messageText.getBytes(), messageText.length(), InetAddress.getByName("255.255.255.255"), Preferences.UDPStatusPort);
 			socket.send(data);
 		} catch (UnknownHostException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return true;
