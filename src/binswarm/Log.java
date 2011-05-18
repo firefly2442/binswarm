@@ -56,6 +56,7 @@ public class Log
 			}
 			catch (Exception e) {
 				System.err.println("Error: " + e.getMessage());
+				e.printStackTrace();
 			}
 		}
 				
@@ -66,6 +67,7 @@ public class Log
 			}
 			catch (Exception e) {
 				System.err.println("Error: " + e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		

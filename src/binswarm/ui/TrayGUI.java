@@ -72,6 +72,7 @@ public class TrayGUI
                   tray.add(trayIcon);
             } catch (AWTException e) {
                 System.err.println("TrayIcon could not be added.");
+                e.printStackTrace();
             }
 
         }
