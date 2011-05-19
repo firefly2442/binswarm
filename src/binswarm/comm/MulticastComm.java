@@ -2,6 +2,7 @@ package binswarm.comm;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
@@ -29,11 +30,12 @@ public class MulticastComm implements Runnable {
 	MessageHeader header = null;
 	UUID uuid;
 	InetAddress group;
-	MulticastSocket socket = null;
+	MulticastSocket receiveSocket = null;
+	DatagramSocket sendSocket = null;
 	int port = 0;
 	
 	public MulticastComm(UUID uuid, String groupAddress, int port)
-	{ 
+	{
 		this(uuid, groupAddress, port, 1);
 	}
 	
@@ -44,8 +46,9 @@ public class MulticastComm implements Runnable {
 		try {
 			group = InetAddress.getByName(groupAddress);
 			this.port = port;
-			socket = new MulticastSocket(port);
-			socket.setTimeToLive(ttl);
+			receiveSocket = new MulticastSocket(port);
+			receiveSocket.setTimeToLive(ttl);
+			sendSocket = new DatagramSocket();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -65,7 +68,8 @@ public class MulticastComm implements Runnable {
 	{
 		boolean success = false;
 		try {
-			socket.joinGroup(group);
+			receiveSocket.joinGroup(group);
+			Log.log("Joined multicast group", Level.INFO);
 			
 			Thread broadcastThread = new Thread(this);
 			broadcastThread.start();
@@ -82,7 +86,7 @@ public class MulticastComm implements Runnable {
 	{
 		boolean success = false;
 		try {
-			socket.leaveGroup(group);
+			receiveSocket.leaveGroup(group);
 			success = true;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -102,7 +106,7 @@ public class MulticastComm implements Runnable {
 		String messageText = formatMessage(message.getMessageType(), message.getXml());
 		DatagramPacket data = new DatagramPacket(messageText.getBytes(), messageText.length(), group, port);
 		try {
-			socket.send(data);
+			sendSocket.send(data);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
@@ -122,7 +126,7 @@ public class MulticastComm implements Runnable {
 			String ipString = null;
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 			try {
-				socket.receive(receivePacket);
+				receiveSocket.receive(receivePacket);
 				
 				InetAddress IPAddress = receivePacket.getAddress();
 				ipString = IPAddress.toString().replaceAll("/", "");
