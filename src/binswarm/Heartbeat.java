@@ -18,13 +18,21 @@ public class Heartbeat implements Runnable, MessageListener {
 	private final Timer timer = new Timer();
 	UDPBroadcast broadcast;
 	UDPListener listener;
+	MulticastComm comm;
 	
 	public Heartbeat(UDPBroadcast broadcast, UDPListener listener)
 	{
 		this.broadcast = broadcast;
 		this.listener = listener;
 		listener.addMessageListener(HelloMessage.MESSAGE_Hello, this);
-		//Constructor
+		Thread broadcastThread = new Thread(this);
+		broadcastThread.start();
+	}
+	
+	public Heartbeat(MulticastComm comm)
+	{
+		this.comm = comm;
+		this.comm.addMessageListener(HelloMessage.MESSAGE_Hello, this);
 		Thread broadcastThread = new Thread(this);
 		broadcastThread.start();
 	}
@@ -32,7 +40,10 @@ public class Heartbeat implements Runnable, MessageListener {
 	public void send()
 	{
 		HelloMessage message = new HelloMessage(Binswarm.VERSION, 1024);
-		broadcast.send(message);
+		if(broadcast != null)
+			broadcast.send(message); //send UDP broadcast message
+		else
+			comm.send(message); //send multicast message
 	}
 	
 	public void start(int seconds) {

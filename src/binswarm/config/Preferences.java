@@ -31,6 +31,7 @@ public class Preferences
 	final String PREF_PrintToConsole = "PrintToConsole";
 	final String PREF_MulticastGroupAddress = "MulticastGroupAddress";
 	final String PREF_MulticastGroupPort = "MulticastGroupPort";
+	final String PREF_UseUDPBroadcast = "UseUDPBroadcast";
 	
 	public static UUID uuid;
 	public static int UDPStatusPort;
@@ -41,6 +42,9 @@ public class Preferences
 	public static boolean PrintToConsole;
 	public static String MulticastGroupAddress;
 	public static int MulticastGroupPort;
+	
+	//set to either use UDP broadcast (true) or multicast (false)
+	public static boolean UseUDPBroadcast;
 	
 	public Preferences()
 	{
@@ -80,6 +84,8 @@ public class Preferences
 		// 239.255.255.255, inclusive. The address 224.0.0.0 is reserved and should not be used.
 		MulticastGroupAddress = "224.0.0.1";
 		MulticastGroupPort = 1337;
+		//Set whether we are using UDP broadcast or multicast
+		UseUDPBroadcast = true;
 	}
 	
 	private void loadXMLFile()
@@ -159,6 +165,10 @@ public class Preferences
 								if(pMulticastGroupPort != 0) // if it's 0 keep value set using setDefaults()
 									MulticastGroupPort = pMulticastGroupPort;
 							}
+							else if(singleElement.getNodeName().equals(this.PREF_UseUDPBroadcast))
+							{
+								UseUDPBroadcast = XmlHelper.ParseBoolean(singleElement);
+							}
 							else
 							{
 								Log.log("Found unexpected element while loading preferences.xml file. elementName="+singleElement.getNodeName(), Level.INFO);
@@ -213,6 +223,8 @@ public class Preferences
 					out.write(XmlHelper.FormatElement(PREF_PrintToConsole,  Boolean.toString(PrintToConsole)));
 					out.write(XmlHelper.FormatElement(PREF_MulticastGroupAddress,  MulticastGroupAddress));
 					out.write(XmlHelper.FormatElement(PREF_MulticastGroupPort,  Integer.toString(MulticastGroupPort)));
+						//whether to use UDP broadcast or multicast
+					out.write(XmlHelper.FormatElement(PREF_UseUDPBroadcast, Boolean.toString(UseUDPBroadcast)));
 				out.write("</Preferences>\n");
 			out.write("</Settings>\n");
 			

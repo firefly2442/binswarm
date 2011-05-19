@@ -4,6 +4,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 
 import binswarm.comm.MessageHeader;
+import binswarm.comm.MulticastComm;
 import binswarm.comm.UDPBroadcast;
 import binswarm.comm.UDPListener;
 import binswarm.config.Preferences;
@@ -16,12 +17,24 @@ public class Networking
 	UDPBroadcast broadcast = null;
 	UDPListener listener = null;
 	Heartbeat hb = null;
+	MulticastComm comm = null;
+	
 	public Networking()
 	{
 		//Constructor
-		broadcast = new UDPBroadcast(new MessageHeader(Preferences.uuid));
-		listener = new UDPListener();
-		hb = new Heartbeat(broadcast, listener);
+		if (Preferences.UseUDPBroadcast == true)
+		{
+			//UDP Broadcast
+			broadcast = new UDPBroadcast(new MessageHeader(Preferences.uuid));
+			listener = new UDPListener();
+			hb = new Heartbeat(broadcast, listener);
+		}
+		else
+		{
+			//Multicast
+			comm = new MulticastComm(Preferences.uuid, Preferences.MulticastGroupAddress, Preferences.MulticastGroupPort, 4); ///@todo add number of hops (4) as a preference option
+			hb = new Heartbeat(comm);
+		}
 	}
 	
 	public static void addComputer(UUID uuid, String IPAddress)
