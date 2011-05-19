@@ -49,6 +49,7 @@ public class MulticastComm implements Runnable {
 			receiveSocket = new MulticastSocket(port);
 			receiveSocket.setTimeToLive(ttl);
 			sendSocket = new DatagramSocket();
+			this.open(); ///@todo <- where do we call open, since it starts the threading, where should this go?
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -59,9 +60,11 @@ public class MulticastComm implements Runnable {
 	
 	public void addMessageListener(String messageType, MessageListener listener)
 	{
-		Log.log("Multicast listener running", Level.INFO);
 		if(messageType != null && listener != null)
+		{
 			listeners.put(messageType, listener);
+			Log.log("Multicast listener running", Level.INFO);
+		}
 	}
 	
 	public boolean open()
@@ -184,7 +187,7 @@ public class MulticastComm implements Runnable {
 					saxe.printStackTrace();
 				}
 				
-				Log.log("Received packet from: " + ipString, Level.INFO);
+				Log.log("Received multicast message from: " + ipString, Level.INFO);
 				
 			} catch (IOException e) {
 				e.printStackTrace();
