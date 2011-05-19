@@ -56,6 +56,7 @@ public class MulticastComm implements Runnable {
 	
 	public void addMessageListener(String messageType, MessageListener listener)
 	{
+		Log.log("Multicast listener running", Level.INFO);
 		if(messageType != null && listener != null)
 			listeners.put(messageType, listener);
 	}
@@ -106,6 +107,7 @@ public class MulticastComm implements Runnable {
 			e.printStackTrace();
 			return false;
 		}
+		Log.log("Sending multicast message", Level.INFO);
 		return true;
 	}
 	
@@ -163,7 +165,6 @@ public class MulticastComm implements Runnable {
 									OnRecievedMessage(header, messageType, innerNodes, ipString);
 									
 									found = true;
-									
 								}								
 							}
 						}
@@ -178,7 +179,6 @@ public class MulticastComm implements Runnable {
 				} catch (SAXException saxe) {
 					saxe.printStackTrace();
 				}
-				
 				
 				Log.log("Received packet from: " + ipString, Level.INFO);
 				
