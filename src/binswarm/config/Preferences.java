@@ -82,7 +82,7 @@ public class Preferences
 		// A multicast group is specified by a class D IP address and by a standard 
 		// UDP port number. Class D IP addresses are in the range 224.0.0.0 to 
 		// 239.255.255.255, inclusive. The address 224.0.0.0 is reserved and should not be used.
-		MulticastGroupAddress = "224.0.0.1";
+		MulticastGroupAddress = "224.0.0.1"; //This will send to ALL hosts on the subnet
 		MulticastGroupPort = 1337;
 		//Set whether we are using UDP broadcast or multicast
 		UseUDPBroadcast = true;

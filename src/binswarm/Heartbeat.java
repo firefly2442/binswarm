@@ -24,7 +24,7 @@ public class Heartbeat implements Runnable, MessageListener {
 	{
 		this.broadcast = broadcast;
 		this.listener = listener;
-		listener.addMessageListener(HelloMessage.MESSAGE_Hello, this);
+		this.listener.addMessageListener(HelloMessage.MESSAGE_Hello, this);
 		Thread broadcastThread = new Thread(this);
 		broadcastThread.start();
 	}
