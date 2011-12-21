@@ -8,45 +8,39 @@ public class FileWatcher implements Runnable {
 
 	private boolean running = false;
 	private Thread WatcherThread = new Thread(this);
-	
-	public FileWatcher()
-	{
-		//Constructor
+
+	public FileWatcher() {
+		// Constructor
 		startWatching();
 	}
-	
-	public boolean isRunning()
-	{
+
+	public boolean isRunning() {
 		return running;
 	}
-	
-	public void startWatching()
-	{
+
+	public void startWatching() {
 		if (!running && !WatcherThread.isAlive()) {
 			running = true;
 			WatcherThread.start();
-		}
-		else {
-			Log.log("Tried to start watching filesystem but thread already running!", Level.SEVERE);
+		} else {
+			Log.log("Tried to start watching filesystem but thread already running!",
+					Level.SEVERE);
 		}
 	}
-	
-	public void stopWatching()
-	{
+
+	public void stopWatching() {
 		running = false;
-		while (WatcherThread.isAlive())
-		{
-			//busy wait until the thread finishes up
+		while (WatcherThread.isAlive()) {
+			// busy wait until the thread finishes up
 		}
 	}
-	
 
 	public void run() {
-		Log.log("Started watching local filesystem for file changes.", Level.INFO);
-		
-		while (running)
-		{
-			
+		Log.log("Started watching local filesystem for file changes.",
+				Level.INFO);
+
+		while (running) {
+
 		}
 	}
 

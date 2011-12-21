@@ -3,83 +3,80 @@ package binswarm.ui;
 import java.awt.*;
 import java.awt.event.*;
 
-
-public class TrayGUI
-{
+public class TrayGUI {
 	public static TrayIcon trayIcon;
-	
-    public TrayGUI()
-    {
-    	//Constructor
-    	
-        if (SystemTray.isSupported())
-        {
-            SystemTray tray = SystemTray.getSystemTray();
-            Image image = Toolkit.getDefaultToolkit().getImage("images/tray.gif");
 
-            MouseListener mouseListener = new MouseListener() {
-                
-                public void mouseClicked(MouseEvent e) {
-                    System.out.println("Tray Icon - Mouse clicked!");
-                }
-                public void mouseEntered(MouseEvent e) {
-                    System.out.println("Tray Icon - Mouse entered!");
-                }
-                public void mouseExited(MouseEvent e) {
-                    System.out.println("Tray Icon - Mouse exited!");
-                }
-                public void mousePressed(MouseEvent e) {
-                    System.out.println("Tray Icon - Mouse pressed!");
-                }
-                public void mouseReleased(MouseEvent e) {
-                    System.out.println("Tray Icon - Mouse released!");
-                }
+	public TrayGUI() {
+		// Constructor
 
-            };
+		if (SystemTray.isSupported()) {
+			SystemTray tray = SystemTray.getSystemTray();
+			Image image = Toolkit.getDefaultToolkit().getImage(
+					"images/tray.gif");
 
-            ActionListener exitListener = new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                	//Exit the app
-                	///@todo: add graceful shutdown to cleanup all running threads
-                	///and network communication
-                    System.exit(0);
-                }
-            };
-            
-            ActionListener showStatusListener = new ActionListener()
-            {
-                public void actionPerformed(ActionEvent e)
-                {
-                    //Show status
-                	GUI.frame.setVisible(true);
-                }
-            };
-            
-            PopupMenu popup = new PopupMenu();
-            MenuItem exitItem = new MenuItem("Exit");
-            MenuItem showStatusItem = new MenuItem("Show Status");
-            showStatusItem.addActionListener(showStatusListener);
-            exitItem.addActionListener(exitListener);
-            popup.add(showStatusItem);
-            popup.add(exitItem);
+			MouseListener mouseListener = new MouseListener() {
 
-            trayIcon = new TrayIcon(image, "BinSwarm", popup);
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("Tray Icon - Mouse clicked!");
+				}
 
-            trayIcon.setImageAutoSize(true);
-            trayIcon.addMouseListener(mouseListener);
+				public void mouseEntered(MouseEvent e) {
+					System.out.println("Tray Icon - Mouse entered!");
+				}
 
-            try {
-                  tray.add(trayIcon);
-            } catch (AWTException e) {
-                System.err.println("TrayIcon could not be added.");
-                e.printStackTrace();
-            }
+				public void mouseExited(MouseEvent e) {
+					System.out.println("Tray Icon - Mouse exited!");
+				}
 
-        }
-        else {
-            System.err.println("System tray is currently not supported.");
-        }
-    }    
+				public void mousePressed(MouseEvent e) {
+					System.out.println("Tray Icon - Mouse pressed!");
+				}
+
+				public void mouseReleased(MouseEvent e) {
+					System.out.println("Tray Icon - Mouse released!");
+				}
+
+			};
+
+			ActionListener exitListener = new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// Exit the app
+					// /@todo: add graceful shutdown to cleanup all running
+					// threads
+					// /and network communication
+					System.exit(0);
+				}
+			};
+
+			ActionListener showStatusListener = new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// Show status
+					GUI.frame.setVisible(true);
+				}
+			};
+
+			PopupMenu popup = new PopupMenu();
+			MenuItem exitItem = new MenuItem("Exit");
+			MenuItem showStatusItem = new MenuItem("Show Status");
+			showStatusItem.addActionListener(showStatusListener);
+			exitItem.addActionListener(exitListener);
+			popup.add(showStatusItem);
+			popup.add(exitItem);
+
+			trayIcon = new TrayIcon(image, "BinSwarm", popup);
+
+			trayIcon.setImageAutoSize(true);
+			trayIcon.addMouseListener(mouseListener);
+
+			try {
+				tray.add(trayIcon);
+			} catch (AWTException e) {
+				System.err.println("TrayIcon could not be added.");
+				e.printStackTrace();
+			}
+
+		} else {
+			System.err.println("System tray is currently not supported.");
+		}
+	}
 }

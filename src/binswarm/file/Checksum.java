@@ -5,22 +5,20 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Checksum {
-	
-	public Checksum()
-	{
-		//constructor
+
+	public Checksum() {
+		// constructor
 	}
-	
-	public static String getChecksum(String fullfile_path)
-	{
+
+	public static String getChecksum(String fullfile_path) {
 		InputStream fis;
 		String result = "";
-		
+
 		try {
 			fis = new FileInputStream(fullfile_path);
-			
+
 			byte[] buffer = new byte[1024];
-			///@todo: Add support for different hash types besides MD5
+			// /@todo: Add support for different hash types besides MD5
 			MessageDigest complete = MessageDigest.getInstance("MD5");
 			int numRead;
 			do {
@@ -30,10 +28,11 @@ public class Checksum {
 				}
 			} while (numRead != -1);
 			fis.close();
-			
+
 			byte[] b = complete.digest();
 			for (int i = 0; i < b.length; i++) {
-			  result += Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring(1);
+				result += Integer.toString((b[i] & 0xff) + 0x100, 16)
+						.substring(1);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -42,8 +41,8 @@ public class Checksum {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	     
-	    return result;
+
+		return result;
 	}
 
 }

@@ -1,4 +1,5 @@
 package binswarm.comm;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -22,113 +23,114 @@ import org.xml.sax.SAXException;
 import binswarm.Log;
 import binswarm.config.Preferences;
 
-
-public class UDPListener implements Runnable
-{
+public class UDPListener implements Runnable {
 	private Map<String, MessageListener> listeners = null;
-	
-	public UDPListener() 
-	{
-		//Constructor
+
+	public UDPListener() {
+		// Constructor
 		Thread listenerThread = new Thread(this);
 		listenerThread.start();
 		this.listeners = new HashMap<String, MessageListener>();
 	}
-	
-	public void addMessageListener(String messageType, MessageListener listener)
-	{
-		if(messageType != null && listener != null)
+
+	public void addMessageListener(String messageType, MessageListener listener) {
+		if (messageType != null && listener != null)
 			listeners.put(messageType, listener);
 	}
 
-	public void run()
-	{
+	public void run() {
 		Log.log("Listening for UDP packets...", Level.INFO);
-		
+
 		DatagramSocket socket;
 		try {
 			socket = new DatagramSocket(Preferences.UDPStatusPort);
 			byte[] receiveData = new byte[1024];
-			
-			while (true)
-			{
-				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+
+			while (true) {
+				DatagramPacket receivePacket = new DatagramPacket(receiveData,
+						receiveData.length);
 				try {
 					socket.receive(receivePacket);
-					
+
 					InetAddress IPAddress = receivePacket.getAddress();
 					String ipString = IPAddress.toString().replaceAll("/", "");
-					
-					String received = new String(receivePacket.getData()).trim();
+
+					String received = new String(receivePacket.getData())
+							.trim();
 					boolean found = false;
-					
-					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-					try
-					{
+
+					DocumentBuilderFactory dbf = DocumentBuilderFactory
+							.newInstance();
+					try {
 						MessageHeader header = null;
 						NodeList innerNodes = null;
-						
+
 						DocumentBuilder db = dbf.newDocumentBuilder();
-						ByteArrayInputStream stream = new ByteArrayInputStream(received.getBytes());
+						ByteArrayInputStream stream = new ByteArrayInputStream(
+								received.getBytes());
 						Document dom = db.parse(stream);
 						String messageType = null;
-						
+
 						NodeList list = dom.getElementsByTagName("body");
-						if(list != null && list.getLength() > 0)
-						{
+						if (list != null && list.getLength() > 0) {
 							Node bodyElement = list.item(0);
-							if(bodyElement != null)
-							{
-								if(bodyElement.getAttributes().getLength() > 0)
-								{
-									Node typeAttribute = bodyElement.getAttributes().getNamedItem("type");
-									if(typeAttribute != null)
-									{
-										messageType = typeAttribute.getTextContent();
-										
+							if (bodyElement != null) {
+								if (bodyElement.getAttributes().getLength() > 0) {
+									Node typeAttribute = bodyElement
+											.getAttributes().getNamedItem(
+													"type");
+									if (typeAttribute != null) {
+										messageType = typeAttribute
+												.getTextContent();
+
 										list = dom.getElementsByTagName("head");
-										if(list != null && list.getLength() > 0)
-										{
-											Element headElement = (Element)list.item(0);
-											header = MessageHeader.parse(headElement);
+										if (list != null
+												&& list.getLength() > 0) {
+											Element headElement = (Element) list
+													.item(0);
+											header = MessageHeader
+													.parse(headElement);
 										}
-										
-										innerNodes = bodyElement.getChildNodes();
-										
-										OnRecievedMessage(header, messageType, innerNodes, ipString);
-										
+
+										innerNodes = bodyElement
+												.getChildNodes();
+
+										OnRecievedMessage(header, messageType,
+												innerNodes, ipString);
+
 										found = true;
-										
-									}								
+
+									}
 								}
 							}
 						}
-						if(!found)
-						{
+						if (!found) {
 							// malformed message
-							Log.log("Malformed message: " + received, Level.INFO);
+							Log.log("Malformed message: " + received,
+									Level.INFO);
 						}
-					} catch(ParserConfigurationException pce) {
+					} catch (ParserConfigurationException pce) {
 						pce.printStackTrace();
 					} catch (SAXException saxe) {
 						saxe.printStackTrace();
 					}
-					
+
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			
+
 		} catch (SocketException e1) {
 			e1.printStackTrace();
 		}
 	}
-	
-	private void OnRecievedMessage(MessageHeader header, String messageType, NodeList innerNodes, String ip)
-	{
-		Log.log(String.format("Received message from %1$s (%2$s): %3$s", header.getUUID().toString(), ip, messageType), Level.INFO);
+
+	private void OnRecievedMessage(MessageHeader header, String messageType,
+			NodeList innerNodes, String ip) {
+		Log.log(String.format("Received message from %1$s (%2$s): %3$s", header
+				.getUUID().toString(), ip, messageType), Level.INFO);
 		MessageListener listener = listeners.get(messageType);
-		if(listener != null)
+		if (listener != null)
 			listener.messageRecieved(header, messageType, innerNodes, ip);
 	}
 }
