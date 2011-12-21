@@ -1,5 +1,6 @@
 package binswarm.comm;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -8,7 +9,6 @@ import java.net.MulticastSocket;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.logging.Level;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -22,25 +22,24 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import binswarm.Log;
+import binswarm.config.Preferences;
 
 public class MulticastComm implements Runnable {
 	private Map<String, MessageListener> listeners = null;
 
 	private MessageHeader header = null;
-	private UUID uuid;
 	private InetAddress group;
 	private MulticastSocket receiveSocket = null;
 	private DatagramSocket sendSocket = null;
 	private int port = 0;
 
-	public MulticastComm(UUID uuid, String groupAddress, int port) {
+	public MulticastComm(String groupAddress, int port) {
 		// get around the fact that Java doesn't support optional parameters
-		this(uuid, groupAddress, port, 1);
+		this(groupAddress, port, 1);
 	}
 
-	public MulticastComm(UUID uuid, String groupAddress, int port, int ttl) {
-		this.uuid = uuid;
-		this.header = new MessageHeader(uuid);
+	public MulticastComm(String groupAddress, int port, int ttl) {
+		this.header = new MessageHeader(Preferences.uuid);
 		try {
 			group = InetAddress.getByName(groupAddress);
 			this.port = port;
@@ -123,8 +122,7 @@ public class MulticastComm implements Runnable {
 
 		while (true) {
 			String ipString = null;
-			DatagramPacket receivePacket = new DatagramPacket(receiveData,
-					receiveData.length);
+			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 			try {
 				receiveSocket.receive(receivePacket);
 
@@ -134,14 +132,14 @@ public class MulticastComm implements Runnable {
 				String received = new String(receivePacket.getData()).trim();
 				boolean found = false;
 
-				DocumentBuilderFactory dbf = DocumentBuilderFactory
-						.newInstance();
+				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 				try {
 					MessageHeader header = null;
 					NodeList innerNodes = null;
 
 					DocumentBuilder db = dbf.newDocumentBuilder();
-					Document dom = db.parse(received);
+					ByteArrayInputStream stream = new ByteArrayInputStream(received.getBytes());
+					Document dom = db.parse(stream);
 					String messageType = null;
 
 					NodeList list = dom.getElementsByTagName("body");
@@ -149,24 +147,19 @@ public class MulticastComm implements Runnable {
 						Node bodyElement = list.item(0);
 						if (bodyElement != null) {
 							if (bodyElement.getAttributes().getLength() > 0) {
-								Node typeAttribute = bodyElement
-										.getAttributes().getNamedItem("type");
+								Node typeAttribute = bodyElement.getAttributes().getNamedItem("type");
 								if (typeAttribute != null) {
-									messageType = typeAttribute
-											.getTextContent();
+									messageType = typeAttribute.getTextContent();
 
 									list = dom.getElementsByTagName("head");
 									if (list != null && list.getLength() > 0) {
-										Element headElement = (Element) list
-												.item(0);
-										header = MessageHeader
-												.parse(headElement);
+										Element headElement = (Element) list.item(0);
+										header = MessageHeader.parse(headElement);
 									}
 
 									innerNodes = bodyElement.getChildNodes();
 
-									OnRecievedMessage(header, messageType,
-											innerNodes, ipString);
+									OnRecievedMessage(header, messageType, innerNodes, ipString);
 
 									found = true;
 								}
@@ -192,10 +185,8 @@ public class MulticastComm implements Runnable {
 		}
 	}
 
-	private void OnRecievedMessage(MessageHeader header, String messageType,
-			NodeList innerNodes, String ip) {
-		Log.log(String.format("Received message from %1$ (%2$): %3$", header
-				.getUUID().toString(), ip, messageType), Level.INFO);
+	private void OnRecievedMessage(MessageHeader header, String messageType, NodeList innerNodes, String ip) {
+		Log.log(String.format("Received message from %1$s (%2$s): %3$s", header.getUUID().toString(), ip, messageType), Level.INFO);
 		MessageListener listener = listeners.get(messageType);
 		if (listener != null)
 			listener.messageRecieved(header, messageType, innerNodes, ip);

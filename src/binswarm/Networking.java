@@ -27,11 +27,9 @@ public class Networking {
 			hb = new Heartbeat(broadcast, listener);
 		} else {
 			// Multicast
-			comm = new MulticastComm(Preferences.uuid,
-					Preferences.MulticastGroupAddress,
-					Preferences.MulticastGroupPort, 4); // /@todo add number of
-														// hops (4) as a
-														// preference option
+			// /@todo add number of hops (4) as a preference option
+			comm = new MulticastComm(Preferences.MulticastGroupAddress, Preferences.MulticastGroupPort, 4);
+			
 			hb = new Heartbeat(comm);
 		}
 	}

@@ -47,27 +47,23 @@ public class UDPListener implements Runnable {
 			byte[] receiveData = new byte[1024];
 
 			while (true) {
-				DatagramPacket receivePacket = new DatagramPacket(receiveData,
-						receiveData.length);
+				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 				try {
 					socket.receive(receivePacket);
 
 					InetAddress IPAddress = receivePacket.getAddress();
 					String ipString = IPAddress.toString().replaceAll("/", "");
 
-					String received = new String(receivePacket.getData())
-							.trim();
+					String received = new String(receivePacket.getData()).trim();
 					boolean found = false;
 
-					DocumentBuilderFactory dbf = DocumentBuilderFactory
-							.newInstance();
+					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 					try {
 						MessageHeader header = null;
 						NodeList innerNodes = null;
 
 						DocumentBuilder db = dbf.newDocumentBuilder();
-						ByteArrayInputStream stream = new ByteArrayInputStream(
-								received.getBytes());
+						ByteArrayInputStream stream = new ByteArrayInputStream(received.getBytes());
 						Document dom = db.parse(stream);
 						String messageType = null;
 
@@ -76,38 +72,28 @@ public class UDPListener implements Runnable {
 							Node bodyElement = list.item(0);
 							if (bodyElement != null) {
 								if (bodyElement.getAttributes().getLength() > 0) {
-									Node typeAttribute = bodyElement
-											.getAttributes().getNamedItem(
-													"type");
+									Node typeAttribute = bodyElement.getAttributes().getNamedItem("type");
 									if (typeAttribute != null) {
-										messageType = typeAttribute
-												.getTextContent();
+										messageType = typeAttribute.getTextContent();
 
 										list = dom.getElementsByTagName("head");
-										if (list != null
-												&& list.getLength() > 0) {
-											Element headElement = (Element) list
-													.item(0);
-											header = MessageHeader
-													.parse(headElement);
+										if (list != null && list.getLength() > 0) {
+											Element headElement = (Element) list.item(0);
+											header = MessageHeader.parse(headElement);
 										}
 
-										innerNodes = bodyElement
-												.getChildNodes();
+										innerNodes = bodyElement.getChildNodes();
 
-										OnRecievedMessage(header, messageType,
-												innerNodes, ipString);
+										OnRecievedMessage(header, messageType, innerNodes, ipString);
 
 										found = true;
-
 									}
 								}
 							}
 						}
 						if (!found) {
 							// malformed message
-							Log.log("Malformed message: " + received,
-									Level.INFO);
+							Log.log("Malformed message: " + received, Level.INFO);
 						}
 					} catch (ParserConfigurationException pce) {
 						pce.printStackTrace();
@@ -125,10 +111,8 @@ public class UDPListener implements Runnable {
 		}
 	}
 
-	private void OnRecievedMessage(MessageHeader header, String messageType,
-			NodeList innerNodes, String ip) {
-		Log.log(String.format("Received message from %1$s (%2$s): %3$s", header
-				.getUUID().toString(), ip, messageType), Level.INFO);
+	private void OnRecievedMessage(MessageHeader header, String messageType, NodeList innerNodes, String ip) {
+		Log.log(String.format("Received message from %1$s (%2$s): %3$s", header.getUUID().toString(), ip, messageType), Level.INFO);
 		MessageListener listener = listeners.get(messageType);
 		if (listener != null)
 			listener.messageRecieved(header, messageType, innerNodes, ip);
