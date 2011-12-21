@@ -25,14 +25,14 @@ import binswarm.Log;
 
 
 public class MulticastComm implements Runnable {
-	Map<String, MessageListener> listeners = null;
+	private Map<String, MessageListener> listeners = null;
 	
-	MessageHeader header = null;
-	UUID uuid;
-	InetAddress group;
-	MulticastSocket receiveSocket = null;
-	DatagramSocket sendSocket = null;
-	int port = 0;
+	private MessageHeader header = null;
+	private UUID uuid;
+	private InetAddress group;
+	private MulticastSocket receiveSocket = null;
+	private DatagramSocket sendSocket = null;
+	private int port = 0;
 	
 	public MulticastComm(UUID uuid, String groupAddress, int port)
 	{

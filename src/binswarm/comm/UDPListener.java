@@ -25,7 +25,8 @@ import binswarm.config.Preferences;
 
 public class UDPListener implements Runnable
 {
-	Map<String, MessageListener> listeners = null;
+	private Map<String, MessageListener> listeners = null;
+	
 	public UDPListener() 
 	{
 		//Constructor

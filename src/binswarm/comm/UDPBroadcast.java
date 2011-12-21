@@ -11,8 +11,8 @@ import binswarm.config.Preferences;
 
 public class UDPBroadcast
 {
-	MessageHeader header;
-	DatagramSocket socket;
+	private MessageHeader header;
+	private DatagramSocket socket;
 	
 	public UDPBroadcast(MessageHeader header)
 	{
