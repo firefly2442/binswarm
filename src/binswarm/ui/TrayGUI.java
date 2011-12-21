@@ -42,6 +42,8 @@ public class TrayGUI
                 public void actionPerformed(ActionEvent e)
                 {
                 	//Exit the app
+                	///@todo: add graceful shutdown to cleanup all running threads
+                	///and network communication
                     System.exit(0);
                 }
             };

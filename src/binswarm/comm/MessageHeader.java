@@ -12,8 +12,8 @@ public class MessageHeader {
 	private UUID uuid;
 	private String xml = null;
 	
-	private MessageHeader()
-	{
+	private MessageHeader() {
+		//constructor
 	}
 	
 	public MessageHeader(UUID uuid)

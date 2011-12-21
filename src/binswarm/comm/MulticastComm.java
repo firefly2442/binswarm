@@ -36,6 +36,7 @@ public class MulticastComm implements Runnable {
 	
 	public MulticastComm(UUID uuid, String groupAddress, int port)
 	{
+		//get around the fact that Java doesn't support optional parameters
 		this(uuid, groupAddress, port, 1);
 	}
 	
