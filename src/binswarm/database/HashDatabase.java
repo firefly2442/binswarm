@@ -2,6 +2,9 @@ package binswarm.database;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+
+import binswarm.Log;
 
 public class HashDatabase {
 	
@@ -21,7 +24,9 @@ public class HashDatabase {
 	
 	public void removeFile(String checksum)
 	{
-		hash_table.remove(checksum);
+		if (hash_table.remove(checksum) == null ) {
+			Log.log("Attempted to remove checksum: " + checksum + ", but it doesn't exist.", Level.SEVERE);
+		}
 	}
 	
 	public FileObject getFileObject(String checksum)
