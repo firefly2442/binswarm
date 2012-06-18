@@ -23,8 +23,7 @@ public class FileWatcher implements Runnable {
 			running = true;
 			WatcherThread.start();
 		} else {
-			Log.log("Tried to start watching filesystem but thread already running!",
-					Level.SEVERE);
+			Log.log("Tried to start watching filesystem but thread already running!", Level.SEVERE);
 		}
 	}
 
@@ -36,8 +35,7 @@ public class FileWatcher implements Runnable {
 	}
 
 	public void run() {
-		Log.log("Started watching local filesystem for file changes.",
-				Level.INFO);
+		Log.log("Started watching local filesystem for file changes.", Level.INFO);
 
 		while (running) {
 
