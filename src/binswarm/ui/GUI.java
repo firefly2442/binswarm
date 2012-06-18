@@ -11,14 +11,10 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
 
-import binswarm.Networking;
 
 public class GUI {
 	public static JFrame frame; // 1st level
@@ -39,6 +35,10 @@ public class GUI {
 				createGUI();
 			}
 		});
+	}
+	
+	public static void showGUI() {
+		frame.setVisible(true);
 	}
 
 	private void createGUI() {
@@ -82,15 +82,17 @@ public class GUI {
 		frame.setSize(800, 600);
 
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		
+		localcomputerPane = LocalComputerGUI.setupGUIElements(localcomputerPane);
 
 		// start threading to continuously update GUI components
-		updateGUI task = new updateGUI();
+		updateGUI task = new updateGUI(clusterPane);
 		task.execute();
 	}
 }
 
 class updateGUI extends SwingWorker<Void, Void> {
-	public updateGUI() {
+	public updateGUI(JPanel clusterP) {
 		// Constructor
 	}
 
@@ -101,40 +103,13 @@ class updateGUI extends SwingWorker<Void, Void> {
 
 	Action updateTable = new AbstractAction() {
 		public void actionPerformed(ActionEvent e) {
-			GUI.clusterPane.removeAll(); // remove all old items
-
-			DefaultTableModel model = new DefaultTableModel();
-			model.addColumn("UUID");
-			model.addColumn("IP Address");
-			model.addColumn("Last Seen");
-
-			JTable table = new JTable(model);
-
-			JScrollPane clusterScroll = new JScrollPane(table);
-			clusterScroll
-					.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			clusterScroll
-					.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-			for (int i = 0; i < Networking.computers.size(); i++) {
-				model.addRow(new Object[] {
-						Networking.computers.get(i).uuid.toString(),
-						Networking.computers.get(i).IPAddress,
-						Networking.computers.get(i)
-								.returnHumanReadableTimestamp() });
-			}
-
-			GUI.clusterPane.add(clusterScroll, BorderLayout.CENTER);
-
-			GUI.clusterPane.revalidate();
-			GUI.clusterPane.repaint();
+			ClusterGUI.updateTable();
 		}
 	};
 }
 
 class WindowEventHandler extends WindowAdapter {
 	public void windowClosing(WindowEvent evt) {
-		TrayGUI.trayIcon.displayMessage("BinSwarm",
-				"BinSwarm minimized to tray", TrayIcon.MessageType.INFO);
+		TrayGUI.trayIcon.displayMessage("BinSwarm", "BinSwarm minimized to tray", TrayIcon.MessageType.INFO);
 	}
 }

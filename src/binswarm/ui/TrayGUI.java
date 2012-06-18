@@ -51,7 +51,7 @@ public class TrayGUI {
 			ActionListener showStatusListener = new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// Show status
-					GUI.frame.setVisible(true);
+					GUI.showGUI();
 				}
 			};
 
