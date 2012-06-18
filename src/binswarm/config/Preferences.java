@@ -53,6 +53,7 @@ public class Preferences {
 			Log.log("Creating new preferences.xml file", Level.INFO);
 			this.saveXMLFile();
 		} else {
+			Log.log("Loading preferences.xml file", Level.INFO);
 			loadXMLFile();
 		}
 	}
@@ -206,9 +207,6 @@ public class Preferences {
 			out.write("<?xml version='1.0' encoding='UTF-8'?>\n");
 			out.write("<Settings>\n");
 			out.write("<Preferences>\n");
-			// generate UUID since this is the first time the program has been
-			// run
-			// uuid = UUID.randomUUID();
 			out.write(XmlHelper.FormatElement(PREF_UUID, uuid.toString()));
 			// UDPStatusPort = 2500;
 			out.write(XmlHelper.FormatElement(PREF_UDPStatusPort,
