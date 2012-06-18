@@ -30,4 +30,8 @@ public class HashDatabase {
 	public FileObject getFileObject(String checksum) {
 		return (FileObject) hash_table.get(checksum);
 	}
+	
+	public boolean fileExists(String checksum) {
+		return hash_table.containsKey(checksum);
+	}
 }
